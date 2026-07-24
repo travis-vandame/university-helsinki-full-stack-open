@@ -5,11 +5,6 @@ var app = express()
 var port = 3000
 
 var __pathDataFileName = path.join(__dirname, 'data', 'notes.json')
-
-// File locking. For a JSON file. Don't @ me.
-// ==========================================
-// All kidding aside I'm going to write a 
-// test at some point for an example
 var __isWriting = false
 var __writeQueue = []
 
