@@ -1,0 +1,21 @@
+{
+  "name": "part0-recreated-notes-app",
+  "version": "1.0.0",
+  "description": "Express 4 note-taking app following Helsinki Full Stack Part0 curriculum",
+  "keywords": [
+    "Helsinki",
+    "Part0",
+    "Learning",
+    "curriculum",
+    "Full Stack Open"
+  ],
+  "license": "ISC",
+  "author": "Travis VanDame",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
