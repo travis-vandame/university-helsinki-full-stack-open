@@ -10,7 +10,7 @@
 
 ## Getting Started
 
-This repository contains exercises for the [Full Stack Open](https://fullstackopen.com) course by the University of Helsinki. Contributions such as improving exercise docs, fixing typos, or adding clarifying examples are welcome.
+This repository contains exercises for the [Full Stack Open](https://fullstackopen.com/en) course by the University of Helsinki. Contributions such as improving exercise docs, fixing typos, or adding clarifying examples are welcome.
 
 > **Note:** Each `partN/` directory is an independent project. Do not modify files outside the part directory where the exercise belongs.
 
