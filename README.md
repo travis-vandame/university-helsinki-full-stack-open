@@ -1,6 +1,6 @@
 # Full Stack Open — University of Helsinki
 
-Exercises for the [Full Stack Open](https://fullstackopen.com) course by the University of Helsinki. This course covers modern web development with React, Node.js, Express, GraphQL, TypeScript, Docker, and more.
+Exercises for the [Full Stack Open](https://fullstackopen.com/en) course by the University of Helsinki. This course covers modern web development with React, Node.js, Express, GraphQL, TypeScript, Docker, and more.
 
 <div align="center">
 
