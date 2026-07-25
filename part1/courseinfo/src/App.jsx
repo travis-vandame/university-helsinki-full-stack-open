@@ -41,9 +41,7 @@ const App = () => {
       { name: 'State of a component', exercises: 14, id: 2 }
     ]
   }
-
   console.log('App course list: ', course)
-
   return (
     <div>
       <Header course={course.name} />
