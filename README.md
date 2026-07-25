@@ -24,9 +24,9 @@ Exercises for the [Full Stack Open](https://fullstackopen.com/en) course by the 
 
 ## Directory Structure
 
-| Directory | Description |
-|---|---|
-| `part0/` | Fundamentals of Web Apps (HTTP, forms, basic SPA concepts) |
+| Directory | Description | Status |
+|:---:|---|:---:|
+| [`part0/`](part0/) | Fundamentals of Web Apps (HTTP, forms, basic SPA concepts) |  ✔️  |
 | `part1/` | Introduction to React (components, state, hooks) |
 | `part2/` | Communicating with Servers (AJAX, Express, Axios, CSS) |
 | `part3/` | Programming a Server with Express (REST APIs, MongoDB) |
