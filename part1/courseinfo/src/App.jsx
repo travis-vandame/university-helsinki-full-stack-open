@@ -1,167 +1,88 @@
 import { useState } from 'react'
 
-/*
-// function that retruns a function
-const hello = (who) => {
-  const handler = () => {
-    console.log('hello world', who)
-  }
-  return handler
+const Header = ({ text }) => <h1>{text}</h1>
+const Button = ({ onClick, text }) => {
+  return(
+    <button onClick={onClick}>{text}</button>
+  )
+}
+const StatisticLine = ({ text, value }) => {
+  return <tr><td>{text}</td><td>{value}</td></tr>
 }
 
-const hello = (who) => {
-  return () => {
-    console.log('hello', who)
-  }
-}
-*/
-const hello = (who) => () => {
-  console.log('hello', who)
-}
+const Statistics = ({ statistics }) => {
+  const isEmpty = Object.values(statistics).every(val => val === 0)
+  const totalClicks = Object.values(statistics).reduce((sum, v) => sum + v, 0)
+  const average = (statistics.good - statistics.bad) / totalClicks
+  const positivePercentage = (statistics.good / totalClicks) * 100
+  
+  if (isEmpty) return <div><span>No feedback given</span></div>
 
-const History = (props) => {
-  if (props.allClicks.length === 0) {
-    return (
-      <div>
-        the app is used by pressing the buttons
-      </div>
-    )
-  }
   return (
-    <div>
-      button press history: {props.allClicks.join(' ')}
-    </div>
+    <table>
+      <caption></caption>
+      <thead></thead>
+      <tbody>
+        <StatisticLine text='good' value={statistics.good} />
+        <StatisticLine text='neutral' value={statistics.neutral} />
+        <StatisticLine text='bad' value={statistics.bad} />
+        <StatisticLine text='all' value={totalClicks} />
+        <StatisticLine text='average' value={average} />
+        <StatisticLine text='positive' value={`${positivePercentage} %`} />
+      </tbody>
+    </table>
   )
 }
 
-const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button>
-
 const App = (props) => {
-  const [left, setLeft] = useState(0)
-  const [right, setRight] = useState(0)
-  const [allClicks, setAll] = useState([])
-  const [value, setValue] = useState(10)
-
-  const setToValue = (newValue) => {
-    console.log('value now', newValue)
-    setValue(newValue)
-  }
-
-  /*
-  const setToValue = (newValue) => () => {
-    console.log('value now', newValue)
-    setValue(newValue)
-  }
-
-  const [total, setTotal] = useState(0)
-  
-  console.log('rendering with all clicks value', allClicks)
-  console.log('total', total)
-  */
-
-  const handleLeftClick = () => {
-    // don't use push it will mutate the allClicks directly
-    setAll(allClicks.concat('L'))
-    setLeft(left +1)
-    /*
-    const updatedLeft = left + 1
-    setLeft(updatedLeft)
-    setTotal(updatedLeft + left)
-    */
-  }
-
-  const handleRightClick = () => {
-    setAll(allClicks.concat('R')) // // don't use push it will mutate the allClicks directly
-    setRight(right +1)
-    /*
-    const updatedRight = right +1
-    setRight(updatedRight)
-    setTotal(updatedRight + right)
-    */
-  }
-  /**
-  const [clicks, setClicks] = useState({
-    left: 0, 
-    right: 0
+  const [isDebug, setIsDebug] = useState(true)
+  const [feedbackClicks, setFeedbackClicks] = useState({
+    good: 0,
+    neutral: 0,
+    bad: 0
   })
 
-  const handleLeftClick = () => {
-    const newClicks = {
-      left: clicks.left + 1,
-      right: clicks.right
+  isDebug && console.log('App props', props)
+  isDebug && console.log('Feedback Clicks:', feedbackClicks)
+
+  const handleFeedbackGood = () => {
+    const newFeedback = {
+      ...feedbackClicks,
+      good: feedbackClicks.good + 1,
     }
-    setClicks(newClicks)
+    isDebug && console.log('Feedback Good Before:', feedbackClicks.good)
+    setFeedbackClicks(newFeedback)
+    isDebug && console.log('Feedback Good After:', newFeedback.good)
   }
 
-  const handleRightClick = () => {
-    const newClicks = {
-      left: clicks.left,
-      right: clicks.right + 1
+  const handleFeedbackNeutral = () => {
+    const newFeedback = {
+      ...feedbackClicks,
+      neutral: feedbackClicks.neutral + 1,
     }
-    setClicks(newClicks)
+    isDebug && console.log('Feedback Neutral Before:', feedbackClicks.neutral)
+    setFeedbackClicks(newFeedback)
+    isDebug && console.log('Feedback Neutral After', newFeedback.neutral)
   }
 
-  const handleLeftClick = () => {
-    const newClicks = {
-      ...clicks,
-      left: clicks.left + 1
+  const handleFeedBackBad = () => {
+    const newFeedBack = {
+      ...feedbackClicks,
+      bad: feedbackClicks.bad + 1
     }
-    console.log('increasing, left value before', clicks.left)
-    setClicks(newClicks)
+    isDebug && console.log('Feedback Bad Before:', feedbackClicks.bad)
+    setFeedbackClicks(newFeedBack)
+    isDebug && console.log('Feedback Bad After', newFeedBack.bad)
   }
-
-  const handleRightClick = () => {
-    const newClicks = {
-        ...clicks,
-        right: clicks.right + 1
-    }
-    console.log('increasing, right value before', clicks.right)
-    setClicks(newClicks)
-  }
-
-  const handleLeftClick =() => setClicks({...clicks, left: clicks.left +1})
-  const handleRightClick = () => setClicks({...clicks, right: clicks.right +1})
-  */
 
   return (
     <div>
-      {/* 
-      {left}
-      <button onClick={() => setLeft(left +1)} > 
-        left
-      </button>
-      <button onClick={() => setRight(right +1)} >
-        right
-      </button>
-      {right}
-      {left}
-      <button onClick={handleLeftClick}>left</button>
-      <button onClick={handleRightClick}>right</button>
-      {right}
-      <p>{allClicks.join(' ')}</p>
-      <p>Total {total}</p>
-
-      <button onClick={hello('world')}>button</button>
-      <button onClick={hello('react')}>button</button>
-      <button onClick={hello('function')}>button</button>
-
-      <button onClick={setToValue(1000)}>thousand</button>
-      <button onClick={setToValue(0)}>reset</button> 
-      <button onClick={setToValue(value + 1)}>increment</button>
-      
-      <button onClick={() => setToValue(1000)}>thousand</button>
-      <button onClick={() => setToValue(0)}>reset</button>
-      <button onClick={() => setToValue(value + 1)}>increment</button>
-      */}
-      {left}
-      <Button onClick={handleLeftClick} text='left' />
-      <Button onClick={handleRightClick} text='right' />
-      {right}
-      <Button onClick={() => setToValue(1000)} text='thousand' />
-      <Button onClick={() => setToValue(0)} text='reset' />
-      <Button onClick={() => setToValue(value + 1)} text='increment' />
-
-      <History allClicks={allClicks} />
+      <Header text='give feedback' />
+      <Button onClick={handleFeedbackGood} text='good' />
+      <Button onClick={handleFeedbackNeutral} text='neutral' />
+      <Button onClick={handleFeedBackBad} text='bad' />
+      <Header text='statistics' />
+      <Statistics statistics={feedbackClicks} />
     </div>
   )
 }
