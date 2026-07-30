@@ -45,7 +45,6 @@ Exercises for the [Full Stack Open](https://fullstackopen.com/en) course by the 
 > **Status Legend:**  
 > ✔️ Complete &nbsp;|&nbsp; 🔄 In Progress &nbsp;|&nbsp; ⏳ Not Started
 
-
 ## Technologies
 
 **Backend:** Express · Node.js · MongoDB · Express · GraphQL
@@ -68,11 +67,14 @@ npm run dev
 npm run test
 ```
 
-## Custom Projects
+## Custom Projects & Experimentation
 
-| Location | Description |
-|---|---|
-| `sandbox/` | Custom Express server built during Part 0, plus subsequent experimentation |
+| Sandbox Environment | Project Scope & Stack | Current Branch | Status |
+| :--- | :--- | :--- | :---: |
+| [`sandbox/`](../../tree/sandbox/sandbox) | **Custom Express Server**<br>• Custom backend built during Part 0 foundations<br>• Ongoing isolated architectural experimentation | [`sandbox` ↗](../../tree/sandbox) | 🔄 |
+
+> **Note:** The experimental playground code is isolated from the main coursework and actively maintained on its own dedicated development branch.
+
 
 ## Contributing
 
