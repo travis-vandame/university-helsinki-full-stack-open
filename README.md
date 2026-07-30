@@ -26,21 +26,23 @@ Exercises for the [Full Stack Open](https://fullstackopen.com/en) course by the 
 
 | Directory | Description | Exercises | Status |
 |:---:|---|---|:---:|
-| [`part0/`](part0/) | Fundamentals of Web Apps <br /> (HTTP, forms, basic SPA concepts) | Note App Traditional ( [`Flow`](/part0/0.4-new-note-traditional-flow.md) )<br />SPA Note Loading ( [`Flow`](/part0/0.5-spa-loading-flow.md) )<br />SPA New Note ( [`Flow`](/part0/0.6-spa-new-note-flow.md) ) | ✔️ |
-| [`part1/`](part1/) | Introduction to React <br /> (components, state, hooks) | Course Info App ( [`Source`](part1/courseinfo/) )<br />UniCafe App ( [`Source`](part1/unicafe/) )<br />Anecdotes App ( [`Source`](part1/anecdotes/) ) | ✔️ |
-| `part2/` | Communicating with Servers <br /> (AJAX, Express, Axios, CSS) |
-| `part3/` | Programming a Server with Express <br /> (REST APIs, MongoDB) |
-| `part4/` | Testing Express Servers & User Administration <br /> (Supertest, authentication) |
-| `part5/` | Testing React Apps <br /> (Vitest, component testing) |
-| `part6/` | Advanced State Management <br /> (Redux Toolkit, useReducer, Context) |
-| `part7/` | React Router, Custom Hooks, Styling <br /> (navigation, Webpack, UI frameworks) |
-| `part8/` | GraphQL <br /> (Apollo Client, schemas, queries, mutations, subscriptions) |
-| `part9/` | TypeScript <br /> (typed Express backends and React components) |
-| `part10/` | React Native <br /> (mobile development, storage, testing) |
-| `part11/` | CI/CD <br /> (GitHub Actions, build pipelines, deployments) |
-| `part12/` | Containers <br /> (Docker, multi-container setups, production) |
-| `part13/` | Relational Databases <br /> (Sequelize, PostgreSQL, migrations) |
-| `part14/` | Next.js <br /> (server-side rendering, app router) |
+|[`part0/`](part0/)|Fundamentals of Web Apps <br /> (HTTP, forms, basic SPA concepts) | Note App Traditional ( [`Flow`](/part0/0.4-new-note-traditional-flow.md) )<br />SPA Note Loading ( [`Flow`](/part0/0.5-spa-loading-flow.md) )<br />SPA New Note ( [`Flow`](/part0/0.6-spa-new-note-flow.md) )|✔️|
+|[`part1/`](part1/)|Introduction to React <br /> (components, state, hooks)|Course Info App ( [`Source`](part1/courseinfo/) )<br />UniCafe App ( [`Source`](part1/unicafe/) )<br />Anecdotes App ( [`Source`](part1/anecdotes/) )|✔️|
+|`part2/`|Communicating with Servers <br /> (AJAX, Express, Axios, CSS)||🔄|
+|`part3/`|Programming a Server with Express <br /> (REST APIs, MongoDB)||⏳|
+|`part4/`|Testing Express Servers & User Administration <br /> (Supertest, authentication)||⏳|
+|`part5/`|Testing React Apps <br /> (Vitest, component testing)||⏳|
+|`part6/`|Advanced State Management <br /> (Redux Toolkit, useReducer, Context)||⏳|
+|`part7/`|React Router, Custom Hooks, Styling <br /> (navigation, Webpack, UI frameworks)||⏳|
+|`part8/`|GraphQL <br /> (Apollo Client, schemas, queries, mutations, subscriptions)||⏳|
+|`part9/`|TypeScript <br /> (typed Express backends and React components)||⏳|
+|`part10/`|React Native <br /> (mobile development, storage, testing)||⏳|
+|`part11/`|CI/CD <br /> (GitHub Actions, build pipelines, deployments)||⏳|
+|`part12/`|Containers <br /> (Docker, multi-container setups, production)||⏳|
+|`part13/`|Relational Databases <br /> (Sequelize, PostgreSQL, migrations)||⏳|
+|`part14/`|Next.js <br /> (server-side rendering, app router)||⏳|
+
+Completed = ✔️ Inpogress = 🔄 Not Started = ⏳
 
 ## Technologies
 
