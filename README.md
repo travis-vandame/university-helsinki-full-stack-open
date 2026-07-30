@@ -27,7 +27,7 @@ Exercises for the [Full Stack Open](https://fullstackopen.com/en) course by the 
 | Directory | Description | Exercises | Status |
 |:---:|---|---|:---:|
 |[`part0/`](part0/)|Fundamentals of Web Apps <br /> (HTTP, forms, basic SPA concepts) | + Note App Traditional <br /> ([`Flow`](/part0/0.4-new-note-traditional-flow.md))<br />+ SPA Note Loading <br /> ([`Flow`](/part0/0.5-spa-loading-flow.md))<br />+ SPA New Note <br /> ([`Flow`](/part0/0.6-spa-new-note-flow.md))|✔️|
-|[`part1/`](part1/)|Introduction to React <br /> (components, state, hooks)|Course Info App <br />+ ([`Source`](part1/courseinfo/))<br />+ UniCafe App <br /> ([`Source`](part1/unicafe/))<br />Anecdotes App <br />+ ([`Source`](part1/anecdotes/))|✔️|
+|[`part1/`](part1/)|Introduction to React <br /> (components, state, hooks)|+ Course Info App<br />([`Source`](part1/courseinfo/))<br />+ UniCafe App<br />([`Source`](part1/unicafe/))<br />+ Anecdotes App<br />([`Source`](part1/anecdotes/))|✔️|
 |`part2/`|Communicating with Servers <br /> (AJAX, Express, Axios, CSS)||🔄|
 |`part3/`|Programming a Server with Express <br /> (REST APIs, MongoDB)||⏳|
 |`part4/`|Testing Express Servers & User Administration <br /> (Supertest, authentication)||⏳|
