@@ -22,27 +22,29 @@ Exercises for the [Full Stack Open](https://fullstackopen.com/en) course by the 
 - [Contributing](#contributing)
 - [License](#license)
 
-## Directory Structure & Course Part Status
+## Course Progress & Directory Structure
 
-| Directory | Description | Exercises | Status |
-|:---:|---|---|:---:|
-|[`part0/`](part0/)|Fundamentals of Web Apps <br /> (HTTP, forms, basic SPA concepts) | + Note App Traditional <br /> ([`Flow`](/part0/0.4-new-note-traditional-flow.md))<br />+ SPA Note Loading <br /> ([`Flow`](/part0/0.5-spa-loading-flow.md))<br />+ SPA New Note <br /> ([`Flow`](/part0/0.6-spa-new-note-flow.md))|✔️|
-|[`part1/`](part1/)|Introduction to React <br /> (components, state, hooks)|+ Course Info App<br />([`Source`](part1/courseinfo/))<br />+ UniCafe App<br />([`Source`](part1/unicafe/))<br />+ Anecdotes App<br />([`Source`](part1/anecdotes/))|✔️|
-|`part2/`|Communicating with Servers <br /> (AJAX, Express, Axios, CSS)||🔄|
-|`part3/`|Programming a Server with Express <br /> (REST APIs, MongoDB)||⏳|
-|`part4/`|Testing Express Servers & User Administration <br /> (Supertest, authentication)||⏳|
-|`part5/`|Testing React Apps <br /> (Vitest, component testing)||⏳|
-|`part6/`|Advanced State Management <br /> (Redux Toolkit, useReducer, Context)||⏳|
-|`part7/`|React Router, Custom Hooks, Styling <br /> (navigation, Webpack, UI frameworks)||⏳|
-|`part8/`|GraphQL <br /> (Apollo Client, schemas, queries, mutations, subscriptions)||⏳|
-|`part9/`|TypeScript <br /> (typed Express backends and React components)||⏳|
-|`part10/`|React Native <br /> (mobile development, storage, testing)||⏳|
-|`part11/`|CI/CD <br /> (GitHub Actions, build pipelines, deployments)||⏳|
-|`part12/`|Containers <br /> (Docker, multi-container setups, production)||⏳|
-|`part13/`|Relational Databases <br /> (Sequelize, PostgreSQL, migrations)||⏳|
-|`part14/`|Next.js <br /> (server-side rendering, app router)||⏳|
+| Directory | Description | Key Deliverables & Labs | Status |
+| :--- | :--- | :--- | :---: |
+| [`part0/`](part0/) | **Fundamentals of Web Apps**<br>• HTTP protocol & web forms<br>• Single Page App (SPA) core concepts | <ul><li>[Traditional Note Flow](part0/0.4-new-note-traditional-flow.md) </li><li>[SPA Loading Flow](part0/0.5-spa-loading-flow.md) </li><li>[SPA New Note Flow](part0/0.6-spa-new-note-flow.md) </li></ul> | ✔️ |
+| [`part1/`](part1/) | **Introduction to React**<br>• Components & JSX nesting<br>• Component state & React hooks | <ul><li>[Course Info App](part1/courseinfo/) </li><li>[UniCafe Feedback App](part1/unicafe/) </li><li>[Anecdotes Voting App](part1/anecdotes/) </li></ul> | ✔️ |
+| `part2/` | **Communicating with Servers**<br>• AJAX requests & Axios<br>• Express basics & styling | _Pending start_ | 🔄 |
+| `part3/` | **Programming a Server with Express**<br>• RESTful API design<br>• MongoDB & Mongoose schemas | _Pending start_ | ⏳ |
+| `part4/` | **Testing Express Servers**<br>• Backend testing with Supertest<br>• User administration & auth | _Pending start_ | ⏳ |
+| `part5/` | **Testing React Apps**<br>• Vitest environment setup<br>• Front-end component testing | _Pending start_ | ⏳ |
+| `part6/` | **Advanced State Management**<br>• Redux Toolkit slices<br>• useReducer & Context API | _Pending start_ | ⏳ |
+| `part7/` | **React Router & Custom Hooks**<br>• Declarative navigation<br>• Webpack configurations | _Pending start_ | ⏳ |
+| `part8/` | **GraphQL**<br>• Apollo Server & Client setup<br>• Schemas, queries, & mutations | _Pending start_ | ⏳ |
+| `part9/` | **TypeScript**<br>• Type-safe Express backends<br>• Typed React components | _Pending start_ | ⏳ |
+| `part10/` | **React Native**<br>• Mobile layout & components<br>• Local storage & native testing | _Pending start_ | ⏳ |
+| `part11/` | **CI/CD**<br>• GitHub Actions pipelines<br>• Automated build & deploy | _Pending start_ | ⏳ |
+| `part12/` | **Containers**<br>• Dockerizing environments<br>• Multi-container production setups | _Pending start_ | ⏳ |
+| `part13/` | **Relational Databases**<br>• Sequelize ORM layers<br>• PostgreSQL database migrations | _Pending start_ | ⏳ |
+| `part14/` | **Next.js**<br>• Server-side rendering (SSR)<br>• Modern App Router paradigms | _Pending start_ | ⏳ |
 
-Completed = ✔️ Inpogress = 🔄 Not Started = ⏳
+> **Status Legend:**  
+> ✔️ Complete &nbsp;|&nbsp; 🔄 In Progress &nbsp;|&nbsp; ⏳ Not Started
+
 
 ## Technologies
 
