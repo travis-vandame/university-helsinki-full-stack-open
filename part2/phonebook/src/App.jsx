@@ -1,18 +1,22 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 import SearchFilter from './components/SearchFilter'
 import PersonForm from './components/PersonForm'
 import PhonebookList from './components/PhonebookList'
 
 const App = (props) => {
-  const [persons, setPersons] = useState([
-    { name: 'Arto Hellas', number: '040-123456', id: crypto.randomUUID() },
-    { name: 'Ada Lovelace', number: '39-44-5323523', id: crypto.randomUUID() },
-    { name: 'Dan Abramov', number: '12-43-234345', id: crypto.randomUUID() },
-    { name: 'Mary Poppendieck', number: '39-23-6423122', id: crypto.randomUUID() }     
-  ])
+  const [persons, setPersons] = useState([])
   const [searchFilter, setSearchFilter] = useState('')
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/persons')
+      .then(response => {
+        setPersons(response.data)
+      })
+  }, [])
 
   const handleSearchFilter = (event) => {
     setSearchFilter(event.target.value)
