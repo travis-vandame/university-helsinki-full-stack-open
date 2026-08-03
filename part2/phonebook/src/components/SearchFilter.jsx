@@ -1,5 +1,11 @@
 const SearchFilter = ({ onChange, value }) => {
-    return <div>filter shown with <input onChange={onChange} value={value} /></div>    
+    return (
+        <>
+            <label htmlFor="search">filter shown with</label>
+            <input id="search" name="search" type="search" 
+                onChange={onChange} value={value} /> 
+        </>
+    )
 }
 
 export default SearchFilter
