@@ -1,14 +1,14 @@
-const PersonForm = (props) => {
+const PersonForm = ({ data: person, handleSubmit, handleFormChange }) => {
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <label htmlFor="name">name</label>
             <input type="text" id="name" name="name" 
-                onChange={props.handleFormChange} 
-                value={props.formData.name} /> <br />
+                onChange={handleFormChange} 
+                value={person.name} /> <br />
             <label htmlFor="number">number</label>
             <input type="tel" name="number" 
-                onChange={props.handleFormChange} 
-                value={props.formData.number} /><br />
+                onChange={handleFormChange} 
+                value={person.number} /><br />
             <button type="submit">add</button>
         </form>
     )

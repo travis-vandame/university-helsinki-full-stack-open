@@ -1,9 +1,14 @@
 {
   "persons": [
     {
-      "name": "Jonny",
+      "name": "Travis",
       "number": "Master",
-      "id": "icUTamLccp4"
+      "id": "yqawlZFv30k"
+    },
+    {
+      "name": "Jonny",
+      "number": "Go",
+      "id": "GQCj1pmfv9s"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
