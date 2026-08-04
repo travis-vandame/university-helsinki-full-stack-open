@@ -5,9 +5,21 @@ const api = axios.create({
     timeout: 10000
 })
 
-const get = () => api.get().then(res => res.data)
-const create = (data) => api.post('/', data).then(res => res.data)
-const update = (id, data) => api.put(`/${id}`, data).then(res => res.data)
+const get = () => api.get()
+    .then(res => 
+        res.data
+        // res.status(500).json({ error: "Internal Server Error" })
+    )
+const create = (data) => api.post('/', data)
+    .then(res => 
+        res.data
+        // res.status(500).json({ error: "Internal Server Error" })
+    )
+const update = (id, data) => api.put(`/${id}`, data)
+    .then(res => 
+        res.data
+        // res.status(500).json({ error: "Internal Server Error" })
+    )
 const remove = (id) => api.delete(`/${id}`)
 
 export default { get, create, update, remove }

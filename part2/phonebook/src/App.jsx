@@ -1,9 +1,20 @@
+import Notification from './components/Notification'
 import SearchFilter from './components/SearchFilter'
 import PersonForm from './components/PersonForm'
 import PersonList from './components/PersonList'
 import usePersons from './hooks/usePersons'
+import useNotifications from './hooks/useNotification'
 
 const App = () => { 
+  const {
+    message,
+    type,
+    show,
+    dismiss
+  } = useNotifications()
+  
+  const personsHook = usePersons(show)
+
   const {
     filteredPersons,
     searchFilter,
@@ -15,11 +26,12 @@ const App = () => {
     createPerson,
     updatePerson,
     removePerson
-  } = usePersons()
+  } = personsHook
 
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={message} type={type} dismiss={dismiss} />
       <SearchFilter 
         onChange={handleSearchFilter} 
         value={searchFilter} 

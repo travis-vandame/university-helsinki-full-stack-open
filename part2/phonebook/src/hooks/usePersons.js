@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import personService from '../services/person'
 
-const usePersons = () => {
+const usePersons = (setNotify) => {
     const [persons, setPersons] = useState([])
     const [searchFilter, setSearchFilter] = useState('')
     const [formData, setFormData] = useState({ name: '', number: '' })
@@ -10,7 +10,9 @@ const usePersons = () => {
         personService
         .get()
         .then(response => setPersons(response))
-        .catch(error => alert(`failed to load persons`))
+        .catch(error => {
+            setNotify(`Failed to load persons`, 'error')
+        })
     }, [])
 
     const handleSearchFilter = (event) => setSearchFilter(event.target.value)
@@ -34,21 +36,19 @@ const usePersons = () => {
             `${newPerson.name} is already added to phonebook. Replace the old number with a new one?`
             )
 
-            if (confirmed) {
-            updatePerson(personFound.id, newPerson)
-            }
-
+            if (confirmed) updatePerson(personFound.id, newPerson)
             return
         }
 
         personService
             .create(newPerson)
             .then(returnPerson => {
-            setPersons([...persons, returnPerson])
-            setFormData({ name: '', number: '' })
+                setPersons([...persons, returnPerson])
+                setNotify(`Added ${returnPerson.name}`, 'success')
+                setFormData({ name: '', number: '' })
             })
             .catch(error => {
-            alert('error adding person')
+                setNotify(`Adding ${newPerson.name} failed`, 'error')
             })
     }
 
@@ -56,12 +56,15 @@ const usePersons = () => {
         return personService
             .update(id, personData)
             .then(returnPerson => {
-            setPersons(persons.map(p =>
-                p.id === id ? returnPerson : p
-            ))
-            setFormData({ name: '', number: ''})
+                setPersons(persons.map(p =>
+                    p.id === id ? returnPerson : p
+                ))
+                setNotify(`Updated ${returnPerson.name}`, 'success')                
+                setFormData({ name: '', number: ''})
             })
-            .catch(() => alert(`update failed`))
+            .catch((error) => {
+                setNotify(`Updatinig ${personData.name} failed`, 'error')
+            })
         }
 
     const removePerson = (id) => {
@@ -74,14 +77,16 @@ const usePersons = () => {
         personService
             .remove(id)
             .then(returnData => {
-            setPersons(persons.filter(p => p.id !== id))
+                setPersons(persons.filter(p => p.id !== id))
             })
             .catch(error => {
-            alert(`delete failed`)
+                setNotify(`Information for ${person.name} has already been remove from server`, 'error')
             })
         }
 
-    const filteredPersons = persons.filter(person => !searchFilter || person.name.toLowerCase().includes(searchFilter.toLowerCase()))
+    const filteredPersons = persons.filter(person => 
+        !searchFilter || typeof searchFilter === 'string' && 
+        person.name.toLowerCase().includes(searchFilter.toLowerCase()))
 
   return {
     // State
