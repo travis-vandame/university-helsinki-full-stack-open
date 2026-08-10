@@ -1,0 +1,10 @@
+{
+  "persons": [
+    {
+      "name": "Travis VanDame",
+      "number": "555-555-5555",
+      "id": "cLz-CTDBeUE"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
