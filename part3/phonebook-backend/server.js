@@ -48,7 +48,7 @@ app.get('/api/persons/:id', (req, res) => {
     const person = persons.find(person => person.id === id)
 
     if (!person) {
-        res.status(404).send()
+        res.status(404).json({ error: 'person not found'})
     }
 
     res.json(person)
@@ -75,7 +75,7 @@ app.post('/api/persons', (req, res) => {
         number: req.body.number
     }
 
-    persons = persons.push(newPerson)
+    persons = persons.concat(newPerson)
 
     res.status(201).json(newPerson)
 })
