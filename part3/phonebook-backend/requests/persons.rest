@@ -1,0 +1,20 @@
+### Get persons information and date timestamp
+GET http://localhost:3001/info
+
+### Get all persons
+GET http://localhost:3001/api/persons
+
+### Get person 1
+GET http://localhost:3001/api/persons/1
+
+### Delete person 1
+DELETE http://localhost:3001/api/persons/1
+
+### Post new person
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+    "name": "Travis VanDame",
+    "number": "555-555-5555"
+}
