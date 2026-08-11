@@ -1,8 +1,8 @@
 const express = require('express')
+const morgan = require('morgan')
+
 const app = express()
 const PORT = 3001
-
-app.use(express.json())
 
 let persons = [
     { 
@@ -27,6 +27,16 @@ let persons = [
     }    
 ]
 
+app.use(express.json())
+
+morgan.token('req-body-post', (req, res) => {
+    return Object.keys(req.body || {}).length ? JSON.stringify(req.body) : '{}'
+})
+
+app.use(morgan(':method :url :status :response-time ms - Payload: :req-body-post', {
+    skip: (req, res) => req.method !== 'POST'
+}))
+
 const generatedId = () => {
     const maxId = persons.length > 0
         ? Math.max(...persons.map(n => Number(n.id)))
@@ -36,11 +46,11 @@ const generatedId = () => {
 }
 
 app.get('/info', (req, res) => {
-    res.send(`Phonebook has info for ${persons.length} people <br />${new Date()}`)
+    res.status(200).send(`Phonebook has info for ${persons.length} people <br />${new Date()}`)
 })
 
 app.get('/api/persons', (req, res) => {
-    res.json(persons)
+    res.status(200).json(persons)
 })
 
 app.get('/api/persons/:id', (req, res) => {
@@ -48,10 +58,29 @@ app.get('/api/persons/:id', (req, res) => {
     const person = persons.find(person => person.id === id)
 
     if (!person) {
-        res.status(404).json({ error: 'person not found'})
+        return res.status(404).json({ error: 'person not found'})
     }
 
-    res.json(person)
+    res.status(200).json(person)
+})
+
+app.patch('/api/persons/:id', (req, res) => {
+    const id = req.params.id
+    const person = persons.find(person => person.id === id)
+
+    if (!person) {
+        return res.status(404).json({ error: 'person not found'})
+    }
+
+    const updatedPerson = {
+        ...person,
+        name: req.body.name || person.name,
+        number: req.body.number || person.number
+    }
+
+    persons = persons.map(p => p.id === id ? updatedPerson : p)
+
+    res.status(200).json(updatedPerson)
 })
 
 app.post('/api/persons', (req, res) => {
@@ -93,7 +122,10 @@ app.delete('/api/persons/:id', (req, res) => {
     res.status(204).end()
 })
 
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`)
-})
+const unknownEndpoint = (req, res) => {
+  res.status(404).send({ error: 'unknown endpoint' })
+}
+app.use(unknownEndpoint)
+
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
 

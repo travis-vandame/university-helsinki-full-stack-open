@@ -1,11 +1,22 @@
 ### Get persons information and date timestamp
 GET http://localhost:3001/info
 
+### Unknown Endpoint
+GET http://localhost:3001/unknown
+
 ### Get all persons
 GET http://localhost:3001/api/persons
 
 ### Get person 1
 GET http://localhost:3001/api/persons/1
+
+### Patch person
+PATCH http://localhost:3001/api/persons/2
+Content-Type: application/json
+
+{
+    "number": "000-000-0000"
+}
 
 ### Delete person 1
 DELETE http://localhost:3001/api/persons/1
