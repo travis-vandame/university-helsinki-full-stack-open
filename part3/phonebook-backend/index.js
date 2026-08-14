@@ -2,7 +2,7 @@ const express = require('express')
 const morgan = require('morgan')
 
 const app = express()
-const PORT = 3001
+const PORT = process.env.PORT || 3001 // Render sets the env port no need for .env file in root
 
 let persons = [
     { 
@@ -28,6 +28,7 @@ let persons = [
 ]
 
 app.use(express.json())
+app.use(express.static('dist'))
 
 morgan.token('req-body-post', (req, res) => {
     return Object.keys(req.body || {}).length ? JSON.stringify(req.body) : '{}'
@@ -74,8 +75,8 @@ app.patch('/api/persons/:id', (req, res) => {
 
     const updatedPerson = {
         ...person,
-        name: req.body.name || person.name,
-        number: req.body.number || person.number
+        name: Object.hasOwn(req.body, 'name') ? req.body.name : person.name,
+        number: Object.hasOwn(req.body, 'number') ? req.body.number : person.number
     }
 
     persons = persons.map(p => p.id === id ? updatedPerson : p)
