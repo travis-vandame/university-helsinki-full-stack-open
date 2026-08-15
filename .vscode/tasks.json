@@ -1,0 +1,78 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Start Phonebook React Vite Frontend",
+      "type": "shell",
+      "command": "npm run dev",
+      "options": {
+        "cwd": "${workspaceFolder}/part3/phonebook-frontend"
+      },
+      "isBackground": true,
+      "presentation": {
+        "panel": "new",
+        "reveal": "silent",
+        "close": true
+      },
+      "problemMatcher": {
+        "owner": "javascript",
+        "fileLocation": "relative",
+        "pattern": {
+          "regexp": "^([^\\s].*)\\((\\d+|\\d+,\\d+|\\d+,\\d+,\\d+,\\d+)\\):\\s+(error|warning|info)\\s+(TS\\d+)\\s*:\\s*(.*)$",
+          "file": 1,
+          "location": 2,
+          "severity": 3,
+          "code": 4,
+          "message": 5
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".*",
+          "endsPattern": "ready in|http://localhost"
+        }
+      }
+    },    
+    {
+      "label": "Start Notes React Vite Frontend",
+      "type": "shell",
+      "command": "npm run dev",
+      "options": {
+        "cwd": "${workspaceFolder}/notes-app/notes-frontend"
+      },
+      "isBackground": true,
+      "presentation": {
+        "panel": "new",
+        "reveal": "silent",
+        "close": true
+      },
+      "problemMatcher": {
+        "owner": "javascript",
+        "fileLocation": "relative",
+        "pattern": {
+          "regexp": "^([^\\s].*)\\((\\d+|\\d+,\\d+|\\d+,\\d+,\\d+,\\d+)\\):\\s+(error|warning|info)\\s+(TS\\d+)\\s*:\\s*(.*)$",
+          "file": 1,
+          "location": 2,
+          "severity": 3,
+          "code": 4,
+          "message": 5
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".*",
+          "endsPattern": "ready in|http://localhost"
+        }
+      }
+    },
+    {
+      "label": "Kill Vite On Stop",
+      "type": "shell",
+      "command": "npx kill-port 5173",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared",
+        "close": true
+      }
+    }
+  ]
+}

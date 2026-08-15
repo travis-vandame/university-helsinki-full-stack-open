@@ -11,3 +11,6 @@ Thumbs.db
 *.pem
 *.key
 AGENTS.md
+# course application deployment github repositories
+notes-*
+uh-fso-*

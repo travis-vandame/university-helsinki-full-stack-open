@@ -9,7 +9,7 @@ const get = () => api.get()
     .then(res => 
         res.data
     )
-const create = (data) => api.post('/', data)
+const create = (data) => api.put('/', data)
     .then(res => 
         res.data
     )

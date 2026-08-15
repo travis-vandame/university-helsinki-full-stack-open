@@ -1,0 +1,74 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Phonebook Backend API",
+            "type": "node",
+            "request": "launch",
+            "skipFiles": ["<node_internals>/**"],
+            "program": "${workspaceFolder}/part3/phonebook-backend/index.js",
+            "cwd": "${workspaceFolder}/part3/phonebook-backend",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": ["run", "dev"],
+            "restart": true,
+            // "console": "integratedTerminal"
+            "console": "internalConsole"
+        },
+        {
+            "name": "Phonebook React Frontend",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost:5173",
+            "webRoot": "${workspaceFolder}/part3/phonebook-frontend",
+            "preLaunchTask": "Start Phonebook React Vite Frontend",
+            "postDebugTask": "Kill Vite On Stop",
+            "runtimeExecutable": "/usr/bin/google-chrome",
+            "resolveSourceMapLocations": [
+                "${workspaceFolder}/part3/phonebook-frontend/**",
+                "!**/node_modules/**",
+                "!chrome-extension://**"  // This explicitly tells VSCodium to ignore extension maps
+            ]            
+        },            
+        {
+            "name": "Notes Backend API",
+            "type": "node",
+            "request": "launch",
+            "skipFiles": ["<node_internals>/**"],
+            "program": "${workspaceFolder}/notes-app/notes-backend/index.js",
+            "cwd": "${workspaceFolder}/notes-app/notes-backend",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": ["run", "dev"],
+            "restart": true,
+            // "console": "integratedTerminal"
+            "console": "internalConsole"
+        },
+        {
+            "name": "Notes React Frontend",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost:5173",
+            "webRoot": "${workspaceFolder}/notes-frontend",
+            "preLaunchTask": "Start Notes React Vite Frontend",
+            "postDebugTask": "Kill Vite On Stop",
+            "runtimeExecutable": "/usr/bin/google-chrome",
+            "resolveSourceMapLocations": [
+                "${workspaceFolder}/notes-app/notes-frontend/**",
+                "!**/node_modules/**",
+                "!chrome-extension://**"  // This explicitly tells VSCodium to ignore extension maps
+            ]            
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Launch Phonebook Full Stack",
+            "configurations": ["Phonebook Backend API", "Phonebook React Frontend"]
+        },        
+        {
+            "name": "Launch Notes Full Stack",
+            "configurations": ["Notes Backend API", "Notes React Frontend"]
+        }
+    ]    
+}

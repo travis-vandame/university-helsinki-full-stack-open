@@ -84,7 +84,7 @@ app.patch('/api/persons/:id', (req, res) => {
     res.status(200).json(updatedPerson)
 })
 
-app.post('/api/persons', (req, res) => {
+app.put('/api/persons', (req, res) => {
     if (!req.body.name || !req.body.number) {
         return res.status(422).json({
             error: 'name and number are missing'

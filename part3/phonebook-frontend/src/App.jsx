@@ -29,7 +29,7 @@ const App = () => {
 
   return (
     <div>
-      <h2>Phonebook</h2>
+      <h2>Phonebook&nbsp;</h2>
       <Notification message={message} type={type} />
       <SearchFilter 
         onChange={handleSearchFilter} 
