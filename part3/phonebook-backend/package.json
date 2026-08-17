@@ -15,7 +15,9 @@
     "deploy:full": "mkdir -p ../uh-fso-phonebook-app && npm run build:backend && npm run build:ui && cd ../uh-fso-phonebook-app && git add . && git commit -m \"phonebook ui-backend full build\" && git push"
   },
   "dependencies": {
+    "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "mongoose": "^9.9.2",
     "morgan": "^1.11.0"
   }
 }
