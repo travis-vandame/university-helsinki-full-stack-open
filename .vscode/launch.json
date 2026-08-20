@@ -14,7 +14,7 @@
             "runtimeExecutable": "npm",
             "runtimeArgs": ["run", "dev"],
             "restart": true,
-            // "console": "integratedTerminal"
+            // "console": "integratedTerminal",
             "console": "internalConsole"
         },
         {
@@ -42,7 +42,7 @@
             "runtimeExecutable": "npm",
             "runtimeArgs": ["run", "dev"],
             "restart": true,
-            // "console": "integratedTerminal"
+            // "console": "integratedTerminal",
             "console": "internalConsole"
         },
         {

@@ -1,31 +1,12 @@
+require('dotenv').config()
+
 const express = require('express')
+const Person = require('./models/person')
 const morgan = require('morgan')
+const mongoose = require('mongoose')
 
 const app = express()
-const PORT = process.env.PORT || 3001 // Render sets the env port no need for .env file in root
-
-let persons = [
-    { 
-      "id": "1",
-      "name": "Arto Hellas", 
-      "number": "040-123456"
-    },
-    { 
-      "id": "2",
-      "name": "Ada Lovelace", 
-      "number": "39-44-5323523"
-    },
-    { 
-      "id": "3",
-      "name": "Dan Abramov", 
-      "number": "12-43-234345"
-    },
-    { 
-      "id": "4",
-      "name": "Mary Poppendieck", 
-      "number": "39-23-6423122"
-    }    
-]
+const PORT = process.env.PORT || 3001
 
 app.use(express.json())
 app.use(express.static('dist'))
@@ -35,92 +16,81 @@ morgan.token('req-body-post', (req, res) => {
 })
 
 app.use(morgan(':method :url :status :response-time ms - Payload: :req-body-post', {
-    skip: (req, res) => req.method !== 'POST'
+    skip: (req, res) => req.method !== 'POST',
+    skip: (req, res) => req.method !== 'PATCH',
+    // Forces Morgan to use console.log instead of process.stdout
+    stream: {
+        write: (message) => console.debug(message.trim())
+    }
 }))
 
-const generatedId = () => {
-    const maxId = persons.length > 0
-        ? Math.max(...persons.map(n => Number(n.id)))
-        : 0
-    
-    return String(maxId + 1)
-}
-
 app.get('/info', (req, res) => {
-    res.status(200).send(`Phonebook has info for ${persons.length} people <br />${new Date()}`)
+    Person.countDocuments().then(count => {
+        const day = new Date()
+        res.status(200).send(`Phonebook has info for ${count} people <br/> ${day}`)
+    })
 })
 
 app.get('/api/persons', (req, res) => {
-    res.status(200).json(persons)
+    Person.find({}).then(people => {
+        res.status(200).json(people)
+    })
 })
 
 app.get('/api/persons/:id', (req, res) => {
-    const id = req.params.id
-    const person = persons.find(person => person.id === id)
-
-    if (!person) {
-        return res.status(404).json({ error: 'person not found'})
-    }
-
-    res.status(200).json(person)
+    Person.findById(req.params.id).then(person => {
+        if (!person) {
+            return res.status(404).json({ error: 'person not found' })
+        }
+        res.status(200).json(person)
+    })
 })
 
 app.patch('/api/persons/:id', (req, res) => {
     const id = req.params.id
-    const person = persons.find(person => person.id === id)
 
-    if (!person) {
-        return res.status(404).json({ error: 'person not found'})
-    }
-
-    const updatedPerson = {
-        ...person,
-        name: Object.hasOwn(req.body, 'name') ? req.body.name : person.name,
-        number: Object.hasOwn(req.body, 'number') ? req.body.number : person.number
-    }
-
-    persons = persons.map(p => p.id === id ? updatedPerson : p)
-
-    res.status(200).json(updatedPerson)
+    Person.findByIdAndUpdate(id, req.body, { return: true, runValidators: true})
+        .then(updatedPerson => {
+            if (!updatedPerson) {
+                return res.status(404).json({ error: 'person not found'})
+            }
+            res.status(200).json(updatedPerson)
+        })
 })
 
-app.put('/api/persons', (req, res) => {
+app.post('/api/persons', (req, res) => {
     if (!req.body.name || !req.body.number) {
         return res.status(422).json({
-            error: 'name and number are missing'
+            error: 'person name or number are missing'
         })
     }
 
-    const hasName = persons.some(person => person.name.toLowerCase() === req.body.name.toLowerCase())
+    Person.findOne({ name: req.body.name }).then(existing => {
+        if (existing) {
+            return res.status(409).json({
+                error: 'name must be unique'
+            })
+        }
 
-    if (hasName) {
-        return res.status(409).json({
-            error: 'name must be unique'
+        const newPerson = Person({
+            name: req.body.name,
+            number: req.body.number
         })
-    }
 
-    const newPerson = {
-        id: generatedId(),
-        name: req.body.name,
-        number: req.body.number
-    }
-
-    persons = persons.concat(newPerson)
-
-    res.status(201).json(newPerson)
+        newPerson.save().then(savedPerson => {
+            res.status(201).json(savedPerson)
+        })        
+    })
 })
 
 app.delete('/api/persons/:id', (req, res) => {
-    const id = req.params.id
-    const personExists = persons.some(person => person.id === id)
-
-    if (!personExists) {
-        return res.status(404).json({ error: 'person not found'})        
-    }
-
-    persons = persons.filter(person => person.id !== id)
-
-    res.status(204).end()
+    Person.findByIdAndDelete(req.params.id)
+        .then(deletedPerson => {
+            if (!deletedPerson) {
+                return res.status(404).json({ error: 'person not found'})
+            }
+            res.status(204).end()
+        })
 })
 
 const unknownEndpoint = (req, res) => {

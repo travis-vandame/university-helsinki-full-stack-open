@@ -2,15 +2,21 @@ require('dotenv').config()
 
 const mongoose = require('mongoose')
 
+if (process.argv.length > 4) {
+    console.error('Command takes two arguments as password is set in .ENV')
+    console.info('EXAMPLE CMD: node mongo.js name number')
+    process.exit(1)
+}
+
 const parseArgs = {
-    person: process.argv[3],
-    number: process.argv[4],
-    listAllPeople: process.argv.slice(2).length === 1
+    name: process.argv[2],
+    number: process.argv[3],
+    listAllPeople: process.argv.slice(2).length === 0
 }
 
 const config = {
     dbUser: process.env.DB_USER,
-    dbPassword: process.argv[2],
+    dbPassword: process.env.DB_PASSWORD,
     dbProtocol: process.env.DB_PROTOCOL,
     dbHost: process.env.DB_HOST,
     dbName: process.env.DB_NAME,
@@ -28,19 +34,19 @@ mongoose.connect(dbConn, { family: 4})
     })
 
 const personSchema = new mongoose.Schema({
-    person: String,
+    name: String,
     number: String
 })
 const PersonModel = mongoose.model('Person', personSchema)
 
 if (!parseArgs.listAllPeople) {
     const newPerson = new PersonModel({
-        person: parseArgs.person,
+        name: parseArgs.name,
         number: parseArgs.number
     })
     newPerson.save()
         .then(resPerson => {
-            console.log(`added ${resPerson.person} number ${resPerson.number}`)
+            console.log(`added ${resPerson.name} number ${resPerson.number}`)
             mongoose.connection.close()
         })
         .catch(error => {
@@ -53,7 +59,7 @@ if (!parseArgs.listAllPeople) {
         .then(resPeople => {
             console.log(`phonebook:`)
             resPeople.forEach(person => {
-                console.log(`${person.person} ${person.number}`)    
+                console.log(`${person.name} ${person.number}`)    
             })
             mongoose.connection.close()
         })

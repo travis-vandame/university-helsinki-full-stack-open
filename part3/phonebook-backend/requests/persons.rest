@@ -4,28 +4,28 @@ GET http://localhost:3001/info
 ### Unknown Endpoint
 GET http://localhost:3001/unknown
 
-### Get all persons
+### Get all people
 GET http://localhost:3001/api/persons
 
-### Get person 1
-GET http://localhost:3001/api/persons/1
+### Get person
+GET http://localhost:3001/api/persons/6a873b9a1ac87a0bf1acdb70
 
 ### Patch person
-PATCH http://localhost:3001/api/persons/2
+PATCH http://localhost:3001/api/persons/6a873b9a1ac87a0bf1acdb70
 Content-Type: application/json
 
 {
     "number": "000-000-0000"
 }
 
-### Delete person 1
-DELETE http://localhost:3001/api/persons/1
+### Delete person
+DELETE http://localhost:3001/api/persons/6a873b9a1ac87a0bf1acdb70
 
-### Post new person
+### Add new person
 POST http://localhost:3001/api/persons
 Content-Type: application/json
 
 {
-    "name": "Travis VanDame",
+    "name": "Crystal",
     "number": "555-555-5555"
 }
