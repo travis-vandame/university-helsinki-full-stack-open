@@ -1,8 +1,8 @@
 import Notification from './components/Notification'
-import SearchFilter from './components/SearchFilter'
+import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
-import PersonList from './components/PersonList'
-import usePersons from './hooks/usePersons'
+import People from './components/People'
+import usePeople from './hooks/usePeople'
 import useNotifications from './hooks/useNotification'
 
 const App = () => { 
@@ -12,38 +12,37 @@ const App = () => {
     show,
   } = useNotifications()
   
-  const personsHook = usePersons(show)
+  const peopleHook = usePeople(show)
 
   const {
-    filteredPersons,
-    searchFilter,
-    formData,
-    setSearchFilter,
-    setFormData,
+    filter,
+    filteredPeople,
+    personForm,
+    setFilter,
+    setPersonForm,
     handleFormChange,
-    handleSearchFilter,
+    handleFilter,
     createPerson,
-    updatePerson,
     removePerson
-  } = personsHook
+  } = peopleHook
 
   return (
     <div>
       <h2>Phonebook&nbsp;</h2>
       <Notification message={message} type={type} />
-      <SearchFilter 
-        onChange={handleSearchFilter} 
-        value={searchFilter} 
+      <Filter 
+        onChange={handleFilter}
+        value={filter} 
       />
       <h2>add a new</h2>
       <PersonForm
-        data={formData}
+        data={personForm}
         handleFormChange={handleFormChange}
         handleSubmit={createPerson} 
       />
       <h2>Numbers</h2>
-      <PersonList 
-        data={filteredPersons} 
+      <People 
+        data={filteredPeople} 
         handleDelete={removePerson}
       />
     </div>
