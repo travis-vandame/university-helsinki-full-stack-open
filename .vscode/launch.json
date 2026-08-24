@@ -26,6 +26,7 @@
             "preLaunchTask": "Start Phonebook React Vite Frontend",
             "postDebugTask": "Kill Vite On Stop",
             "runtimeExecutable": "/usr/bin/google-chrome",
+            "userDataDir": "${workspaceFolder}/.vscode/chrome-debug-profile",           
             "resolveSourceMapLocations": [
                 "${workspaceFolder}/part3/phonebook-frontend/**",
                 "!**/node_modules/**",
@@ -54,6 +55,7 @@
             "preLaunchTask": "Start Notes React Vite Frontend",
             "postDebugTask": "Kill Vite On Stop",
             "runtimeExecutable": "/usr/bin/google-chrome",
+            "userDataDir": "${workspaceFolder}/.vscode/chrome-debug-profile",           
             "resolveSourceMapLocations": [
                 "${workspaceFolder}/notes-app/notes-frontend/**",
                 "!**/node_modules/**",
