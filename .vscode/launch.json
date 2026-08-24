@@ -1,7 +1,4 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
         {
@@ -14,7 +11,6 @@
             "runtimeExecutable": "npm",
             "runtimeArgs": ["run", "dev"],
             "restart": true,
-            // "console": "integratedTerminal",
             "console": "internalConsole"
         },
         {
@@ -30,7 +26,7 @@
             "resolveSourceMapLocations": [
                 "${workspaceFolder}/part3/phonebook-frontend/**",
                 "!**/node_modules/**",
-                "!chrome-extension://**"  // This explicitly tells VSCodium to ignore extension maps
+                "!chrome-extension://**"
             ]            
         },            
         {
@@ -43,7 +39,6 @@
             "runtimeExecutable": "npm",
             "runtimeArgs": ["run", "dev"],
             "restart": true,
-            // "console": "integratedTerminal",
             "console": "internalConsole"
         },
         {
@@ -59,7 +54,7 @@
             "resolveSourceMapLocations": [
                 "${workspaceFolder}/notes-app/notes-frontend/**",
                 "!**/node_modules/**",
-                "!chrome-extension://**"  // This explicitly tells VSCodium to ignore extension maps
+                "!chrome-extension://**"
             ]            
         }
     ],

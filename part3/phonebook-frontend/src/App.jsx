@@ -18,8 +18,6 @@ const App = () => {
     filter,
     filteredPeople,
     personForm,
-    setFilter,
-    setPersonForm,
     handleFormChange,
     handleFilter,
     createPerson,
