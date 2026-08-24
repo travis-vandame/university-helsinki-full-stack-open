@@ -1,4 +1,4 @@
-const Person = ({ data: person, handleDelete }) => {
+const Person = ({ person, handleDelete }) => {
     return (
         <>
             <span>{person.name} {person.number}</span> 

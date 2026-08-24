@@ -36,13 +36,13 @@ const App = () => {
       />
       <h2>add a new</h2>
       <PersonForm
-        data={personForm}
+        person={personForm}
         handleFormChange={handleFormChange}
         handleSubmit={createPerson} 
       />
       <h2>Numbers</h2>
       <People 
-        data={filteredPeople} 
+        people={filteredPeople} 
         handleDelete={removePerson}
       />
     </div>

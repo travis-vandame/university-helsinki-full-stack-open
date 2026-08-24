@@ -13,12 +13,7 @@ const useNotification = () => {
         }, 5000)
     }
 
-    const dismiss = () => {
-        setMessage(null)
-        setType(null)
-    }
-
-    return { message, type, show, dismiss }    
+    return { message, type, show }    
 }
 
 export default useNotification

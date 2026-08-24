@@ -1,9 +1,10 @@
 require('dotenv').config()
 
 const express = require('express')
-const Person = require('./models/person')
 const morgan = require('morgan')
 const mongoose = require('mongoose')
+
+const Person = require('./models/person')
 
 const app = express()
 const PORT = process.env.PORT || 3001
@@ -17,8 +18,7 @@ morgan.token('req-body-post', (req, res) => {
 
 app.use(morgan(':method :url :status :response-time ms - Payload: :req-body-post', {
     skip: (req, res) => !['POST', 'PUT', 'PATCH'].includes(req.method),
-    // Forces Morgan to use console.log instead of process.stdout
-    stream: {
+    stream: { // Force Morgan to use console.log instead of process.stdout
         write: (message) => console.debug(message.trim())
     }
 }))
@@ -55,23 +55,18 @@ app.get('/api/persons/:id', (req, res, next) => {
 app.post('/api/persons', (req, res, next) => {
     const { name, number } = req.body
 
-    if (!name || !number) {
-        return res.status(422).json({
-            error: 'person name or number is missing'
-        })
-    }
-
     const filter = { name: name }
     const update = { name: name, number: number }
     const options = { 
         upsert: true,
+        runValidators: true,
         returnDocument: 'after', 
         setDefaultsOnInsert: true 
     } 
 
     Person.findOneAndUpdate(filter, update, options)
-        .then(result => {
-            res.status(201).json(result)
+        .then(person => {
+            res.status(201).json(person)
         })
         .catch(error => next(error))
 })
@@ -79,7 +74,11 @@ app.post('/api/persons', (req, res, next) => {
 app.patch('/api/persons/:id', (req, res, next) => {
     const id = req.params.id
 
-    Person.findByIdAndUpdate(id, req.body, { return: true, returnDocument: 'after', runValidators: true})
+    Person.findByIdAndUpdate(id, req.body, { 
+            return: true, 
+            returnDocument: 'after', 
+            runValidators: true
+        })
         .then(updatedPerson => {
             if (!updatedPerson) {
                 return res.status(404).json({ error: 'person not found'})
@@ -90,7 +89,9 @@ app.patch('/api/persons/:id', (req, res, next) => {
 })
 
 app.delete('/api/persons/:id', (req, res, next) => {
-    Person.findByIdAndDelete(req.params.id)
+    const id = req.params.id
+
+    Person.findByIdAndDelete(id)
         .then(deletedPerson => {
             if (!deletedPerson) {
                 return res.status(404).json({ error: 'person not found'})
@@ -108,6 +109,8 @@ app.use(unknownEndpoint)
 const errorHandler = (error, req, res, next) => {
     if (error.name === 'CastError') {
         return res.status(400).send({ error: 'mailformatted id'})
+    } else if (error.name === 'ValidationError') {
+        return res.status(400).json({ error: error.message })
     }
     next(error)
 }

@@ -23,7 +23,10 @@ const usePeople = (notify) => {
         setFilter(event.target.value)
     }
     
-    const handleFormChange = (event) => setPersonForm({ ...personForm, [event.target.name]: event.target.value })
+    const handleFormChange = (event) => setPersonForm({ 
+        ...personForm, 
+        [event.target.name]: event.target.value 
+    })
 
     const createPerson = (event) => {
         event.preventDefault()
@@ -63,8 +66,8 @@ const usePeople = (notify) => {
                 setPersonForm({ name: '', number: '' })
             })
             .catch(error => {
-                console.log(error)
-                notify(`Add ${newPerson.name} failed`, 'error')
+                const serverError = error.response.data.error
+                notify(serverError, 'error')
             })
         }
         

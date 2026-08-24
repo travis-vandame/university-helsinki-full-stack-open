@@ -1,4 +1,4 @@
-const PersonForm = ({ data: person, handleSubmit, handleFormChange }) => {
+const PersonForm = ({ person, handleSubmit, handleFormChange }) => {
     return (
         <form onSubmit={handleSubmit}>
             <label htmlFor="name">name</label>

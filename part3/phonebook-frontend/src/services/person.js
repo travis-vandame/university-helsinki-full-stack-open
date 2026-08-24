@@ -95,18 +95,40 @@ api.interceptors.response
         }
     )
 
-const get = () => api.get()
-    .then(res => 
-        res.data
-    )
-const create = (data) => api.post('/', data)
-    .then(res => 
-        res.data
-    )
-const update = (id, data) => api.patch(`/${id}`, data)
-    .then(res =>
-        res.data
-    )
-const remove = (id) => api.delete(`/${id}`)
+const get = () => {
+    const request = api.get()
+    return request
+        .then(res => res.data)
+        .catch(error => {
+            return Promise.reject(error)
+        })
+}
+
+const create = (data) => {
+    const request = api.post(`/`, data)
+    return request
+        .then(res => res.data)
+        .catch(error => {
+            return Promise.reject(error)
+        })
+}
+
+const update = (id, data) => {
+    const request = api.patch(`/${id}`, data)
+    return request
+        .then(res => res.data)
+        .catch(error => {
+            return Promise.reject(error)
+        })
+}
+
+const remove = (id) => {
+    const request = api.delete(`/${id}`)
+    return request
+        .then(res => res.data)
+        .catch(error => {
+            return Promise.reject(error)
+        })
+}
 
 export default { get, create, update, remove }
