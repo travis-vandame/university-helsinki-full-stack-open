@@ -11,3 +11,10 @@ Thumbs.db
 *.pem
 *.key
 AGENTS.md
+
+# VSCode/VSCodium 
+.vscode/chrome-debug-profile/
+
+# course application deployment github repositories
+notes-*
+uh-fso-*

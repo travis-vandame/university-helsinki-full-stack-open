@@ -1,0 +1,31 @@
+### Get persons information and date timestamp
+GET http://localhost:3001/info
+
+### Unknown Endpoint
+GET http://localhost:3001/unknown
+
+### Get all people Rename persons -> people
+GET http://localhost:3001/api/persons
+
+### Get person Rename persons -> people
+GET http://localhost:3001/api/persons/6a8bf59cea2b2cc0d2ce67ad
+
+### Patch person Rename persons -> people
+PATCH http://localhost:3001/api/persons/6a8bf59cea2b2cc0d2ce67ad
+Content-Type: application/json
+
+{
+    "number": "040-22337777"
+}
+
+### Delete person Rename persons -> people
+DELETE http://localhost:3001/api/persons/6a8bf59cea2b2cc0d2ce67ad
+
+### Add new person Rename persons -> people
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+    "name": "Crystal",
+    "number": "040-22334455"
+}

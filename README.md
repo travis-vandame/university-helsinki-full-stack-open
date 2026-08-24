@@ -29,8 +29,8 @@ Exercises for the [Full Stack Open](https://fullstackopen.com/en) course by the 
 | [`part0/`](part0/) | **Fundamentals of Web Apps**<br>• HTTP protocol & web forms<br>• Single Page App (SPA) core concepts | <ul><li>[Traditional Note Flow](part0/0.4-new-note-traditional-flow.md) </li><li>[SPA Loading Flow](part0/0.5-spa-loading-flow.md) </li><li>[SPA New Note Flow](part0/0.6-spa-new-note-flow.md) </li></ul> | ✔️ |
 | [`part1/`](part1/) | **Introduction to React**<br>• Components & JSX nesting<br>• Component state & React hooks | <ul><li>[Course Info App](part1/courseinfo/) </li><li>[UniCafe Feedback App](part1/unicafe/) </li><li>[Anecdotes Voting App](part1/anecdotes/) </li></ul> | ✔️ |
 | [`part2/`](part2/) | **Communicating with Servers**<br>• AJAX requests with fetch and Axios<br>• JSON Server as mock backend<br>• Styling applications with CSS | <ul><li>[Course Info App](part2/courseinfo/) </li><li>[Phone Number App](part2/phonebook/) </li><li>[Countries App](part2/countries/) </li></ul> | ✔️ |
-| `part3/` | **Programming a Server with Express**<br>• RESTful API design<br>• MongoDB & Mongoose schemas | _Pending start_ | 🔄 |
-| `part4/` | **Testing Express Servers**<br>• Backend testing with Supertest<br>• User administration & auth | _Pending start_ | ⏳ |
+| [`part3/`](part3/) | **Programming a Server with Express**<br>• RESTful API design<br>• MongoDB & Mongoose schemas | <ul><li>[Phonebook Backend](part3/phonebook-backend/) </li><li>[Phonebook Frontend](part3/phonebook-frontend/) </li></ul> | ✔️ |
+| `part4/` | **Testing Express Servers**<br>• Backend testing with Supertest<br>• User administration & auth | _In progress_ | 🔄 |
 | `part5/` | **Testing React Apps**<br>• Vitest environment setup<br>• Front-end component testing | _Pending start_ | ⏳ |
 | `part6/` | **Advanced State Management**<br>• Redux Toolkit slices<br>• useReducer & Context API | _Pending start_ | ⏳ |
 | `part7/` | **React Router & Custom Hooks**<br>• Declarative navigation<br>• Webpack configurations | _Pending start_ | ⏳ |
@@ -47,7 +47,7 @@ Exercises for the [Full Stack Open](https://fullstackopen.com/en) course by the 
 
 ## Technologies
 
-**Backend:** Express · Node.js · MongoDB · Express · GraphQL
+**Backend:** Express · Node.js · MongoDB · GraphQL
 **Frontend:** React · Vite · React Router · Redux Toolkit
 **Testing:** Jest · Vitest · Supertest
 **Other:** TypeScript · Docker · GitHub Actions · PostgreSQL · Sequelize
@@ -71,10 +71,9 @@ npm run test
 
 | Sandbox Environment | Project Scope & Stack | Current Branch | Status |
 | :--- | :--- | :--- | :---: |
-| [`sandbox/`](../../tree/sandbox/sandbox) | **Custom Express Server**<br>• Custom backend built during Part 0 foundations<br>• Ongoing isolated architectural experimentation | [`sandbox` ↗](../../tree/sandbox) | 🔄 |
+| [`sandbox/`](sandbox/) | **Custom Express Server**<br>• Custom backend built during Part 0 foundations<br>• Ongoing isolated architectural experimentation | [`sandbox` ↗](sandbox) | 🔄 |
 
 > **Note:** The experimental playground code is isolated from the main coursework and actively maintained on its own dedicated development branch.
-
 
 ## Contributing
 
