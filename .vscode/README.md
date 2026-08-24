@@ -1,92 +1,148 @@
-# VS Code Tasks Reference
+# VS Code Configuration Reference
 
-## Overview
-
-This directory contains VS Code task configurations for running and managing the Notes frontend development server. Tasks are defined in `tasks.json` and can be triggered from the Command Palette (`Ctrl+Shift+P`) or via the Run Task dropdown.
+This directory contains VS Code configurations for running and debugging the Phonebook and Notes full-stack applications.
 
 ---
 
-## Task: Start Notes Vite Frontend
+## Files
 
-Launches the Vite development server for the `notes-frontend` project.
+| File | Purpose |
+|------|---------|
+| `tasks.json` | Background tasks for starting/stopping Vite dev servers |
+| `launch.json` | Debug configurations for backends, frontends, and compound full-stack setups |
+| `chrome-debug-profile/` | Isolated Chrome profile used for browser debugging (do not commit) |
 
-### Configuration Fields
+---
+
+## Tasks (tasks.json)
+
+### Task: Start Phonebook React Vite Frontend
+
+Launches the Vite dev server for the Phonebook frontend.
 
 | Field | Value | Purpose |
 |-------|-------|---------|
-| `label` | `Start Notes Vite Frontend` | Human-readable name shown in the Command Palette |
-| `type` | `shell` | Executes the command in the system terminal (vs `process` which runs in the built-in terminal) |
-| `command` | `npm run dev` | The actual command run in the terminal |
-| `cwd` | `${workspaceFolder}/notes-frontend` | Sets the working directory so all relative paths resolve correctly |
-| `isBackground` | `true` | Tells VS Code this is a long-running task. Prevents the progress spinner and allows dependent tasks to work |
+| `label` | `Start Phonebook React Vite Frontend` | Name shown in Command Palette |
+| `type` | `shell` | Runs in system terminal |
+| `command` | `npm run dev` | Starts Vite |
+| `cwd` | `${workspaceFolder}/part3/phonebook-frontend` | Working directory |
+| `isBackground` | `true` | Long-running task |
+| `presentation.panel` | `new` | Opens a dedicated terminal panel |
+| `presentation.reveal` | `silent` | Does not reveal terminal |
+| `presentation.close` | `true` | Closes terminal when task ends |
 
-### Problem Matcher
+#### Problem Matcher
 
-The `problemMatcher` scans terminal output for TypeScript compiler errors and maps them to the VS Code Problems panel.
-
-#### Pattern Breakdown
+Detects TypeScript errors and maps them to the Problems panel (`Ctrl+Shift+M`).
 
 ```regex
-^([^\\s].*)\\((\\d+|\\d+,\\d+|\\d+,\\d+,\\d+,\\d+)\\):\\s+(error|warning|info)\\s+(TS\\d+)\\s*:\\s*(.*)$
+^([^\s].*)\((\d+|\d+,\d+|\d+,\d+,\d+,\d+)\):\s+(error\|warning\|info)\s+(TS\d+)\s*:\s*(.*)$
 ```
 
 | Capture Group | Purpose | Example |
 |---------------|---------|---------|
 | Group 1 (`file`) | File path relative to `cwd` | `src/App.tsx` |
-| Group 2 (`location`) | Line/column numbers | `12,3` or `12` |
-| Group 3 (`severity`) | Error level: `error`, `warning`, or `info` | `error` |
-| Group 4 (`code`) | Compiler code (e.g., `TS2322`) | `TS2322` |
-| Group 5 (`message`) | The actual error description | `Type 'string' is not assignable to type 'number'` |
+| Group 2 (`location`) | Line/column | `12,3` |
+| Group 3 (`severity`) | `error`, `warning`, or `info` | `error` |
+| Group 4 (`code`) | TS compiler code | `TS2322` |
+| Group 5 (`message`) | Error description | `Type 'string' is not assignable to type 'number'` |
 
 #### Background Watching
 
-Because Vite runs indefinitely, the `background` property tells VS Code when the server is ready:
-
 | Field | Value | Purpose |
 |-------|-------|---------|
-| `activeOnStart` | `true` | Start monitoring output as soon as the task launches |
-| `beginsPattern` | `.*` | Any terminal output signals compilation has started |
-| `endsPattern` | `ready in\|http://localhost` | Signals the server is live — unblocks the editor |
+| `activeOnStart` | `true` | Begin monitoring immediately |
+| `beginsPattern` | `.*` | Any output signals dev server started |
+| `endsPattern` | `ready in\|http://localhost` | Signals server is ready, unblocks editor |
+
+### Task: Start Notes React Vite Frontend
+
+Identical to the Phonebook task but targets `notes-app/notes-frontend`.
+
+| Field | Value |
+|-------|-------|
+| `label` | `Start Notes React Vite Frontend` |
+| `cwd` | `${workspaceFolder}/notes-app/notes-frontend` |
+
+### Task: Kill Vite On Stop
+
+Kills port 5173 when the workspace closes or manually triggered.
+
+| Field | Value |
+|-------|-------|
+| `label` | `Kill Vite On Stop` |
+| `command` | `npx kill-port 5173` |
+| `presentation.reveal` | `silent` |
+| `presentation.panel` | `shared` |
+| `presentation.close` | `true` |
+
+> **Note:** On Windows, replace the command with `taskkill /f /im node.exe` or `npx kill-port 5173`.
 
 ---
 
-## Task: Kill Vite On Stop
+## Debug Configurations (launch.json)
 
-Kills any running Vite or `npm run dev` processes when the workspace is closed.
+### Backend API Debuggers
 
-### Configuration Fields
+| Name | Type | Request | Program | CWD |
+|------|------|---------|---------|-----|
+| `Phonebook Backend API` | `node` | `launch` | `${workspaceFolder}/part3/phonebook-backend/index.js` | `${workspaceFolder}/part3/phonebook-backend` |
+| `Notes Backend API` | `node` | `launch` | `${workspaceFolder}/notes-app/notes-backend/index.js` | `${workspaceFolder}/notes-app/notes-backend` |
 
-| Field | Value | Purpose |
-|-------|-------|---------|
-| `label` | `Kill Vite On Stop` | Triggered automatically on workspace close |
-| `command` | `pkill -f 'vite\|npm run dev'` | Finds and kills matching processes by name |
-| `reveal` | `silent` | Don't show the terminal when running |
-| `panel` | `shared` | Reuse the same terminal panel if multiple tasks are run |
-| `close` | `true` | Close the terminal after the task completes |
+Both use:
+- `runtimeExecutable`: `npm`
+- `runtimeArgs`: `["run", "dev"]`
+- `restart`: `true` (auto-restart on change via nodemon)
+- `console`: `internalConsole`
 
-> **Note:** On Windows, replace the `command` with: `taskkill /f /im node.exe` or `npx kill-port 5173`
+### Frontend Browser Debuggers
+
+| Name | Type | Request | URL | webRoot |
+|------|------|---------|-----|---------|
+| `Phonebook React Frontend` | `chrome` | `launch` | `http://localhost:5173` | `${workspaceFolder}/part3/phonebook-frontend` |
+| `Notes React Frontend` | `chrome` | `launch` | `http://localhost:5173` | `${workspaceFolder}/notes-app/notes-frontend` |
+
+Both use:
+- `preLaunchTask`: Starts the corresponding Vite frontend task
+- `postDebugTask`: `Kill Vite On Stop`
+- `runtimeExecutable`: `/usr/bin/google-chrome`
+- `userDataDir`: `${workspaceFolder}/.vscode/chrome-debug-profile` (isolated debug profile)
+- `resolveSourceMapLocations`: Resolves sourcemaps for the frontend, excludes `node_modules` and Chrome extensions
+
+### Compound Configurations
+
+Run backend + frontend simultaneously from the Debug panel dropdown.
+
+| Name | Configurations |
+|------|----------------|
+| `Launch Phonebook Full Stack` | `Phonebook Backend API`, `Phonebook React Frontend` |
+| `Launch Notes Full Stack` | `Notes Backend API`, `Notes React Frontend` |
 
 ---
 
 ## Useful Commands
 
 ```bash
-# Open Command Palette and select a task
-Ctrl+Shift+P → Tasks: Run Task
+# Run a task
+Ctrl+Shift+P → Tasks: Run Task → <task name>
 
-# Run task defined in tasks.json
-Ctrl+Shift+P → Tasks: Run Task → Start Notes Vite Frontend
+# Start debugging
+Ctrl+Shift+D → Select configuration from dropdown → F5
 
-# View Problems panel (shows errors from problemMatcher)
+# View Problems panel
 Ctrl+Shift+M
 
 # View terminal output
 Ctrl+`
 ```
 
+---
+
 ## Troubleshooting
 
-- **Task never starts:** Check that `notes-frontend/` exists and `npm install` has been run
-- **Problems panel not showing errors:** Verify `problemMatcher` regex matches your compiler output format
-- **Server won't stop:** Run the `Kill Vite On Stop` task manually or use `pkill -f vite` in the terminal
-- **Wrong working directory:** Ensure `cwd` path matches where your frontend lives
+- **Task never starts:** Verify the target directory exists and `npm install` has been run
+- **Port 5173 already in use:** Run `npx kill-port 5173` manually or trigger the `Kill Vite On Stop` task
+- **Problems panel not showing errors:** Ensure your TypeScript compiler output matches the `problemMatcher` regex pattern
+- **Debugger won't connect:** Confirm the Vite dev server is running and the URL (`http://localhost:5173`) matches
+- **Wrong working directory:** Check that `cwd` paths align with your project structure
+- **Chrome profile conflicts:** The `chrome-debug-profile/` directory isolates debug sessions from your main Chrome profile
