@@ -10,7 +10,7 @@ const usePeople = (notify) => {
         personService
             .get()
             .then(response => setPeople(response))
-            .catch(error => {
+            .catch(() => {
                 notify(`Failed to load persons`, 'error')
             })
     }, [])
@@ -80,11 +80,11 @@ const usePeople = (notify) => {
 
         personService
             .remove(id)
-            .then(returnData => {
+            .then(() => {
                 setPeople(people.filter(p => p.id !== id))
                 notify(`Removed ${person.name}`, 'success')
             })
-            .catch(error => {
+            .catch(() => {
                 notify(`Information for ${person.name} has already been removed from server`, 'error')
             })
         }
