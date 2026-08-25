@@ -1,0 +1,13 @@
+### Get Blog List
+GET http://localhost:3003/api/blogs
+
+### Post New Entry
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+  "title": "Test Entry 1",
+  "author": "Jennifer VanDame",
+  "url": "http://www.mongodb.com",
+  "likes": 1
+}

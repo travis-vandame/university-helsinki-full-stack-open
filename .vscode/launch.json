@@ -2,6 +2,18 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Blog Backend API",
+            "type": "node",
+            "request": "launch",
+            "skipFiles": ["<node_internals>/**"],
+            "program": "${workspaceFolder}/part4/blog-backend/index.js",
+            "cwd": "${workspaceFolder}/part4/blog-backend",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": ["run", "dev"],
+            "restart": true,
+            "console": "internalConsole"
+        },      
+        {
             "name": "Phonebook Backend API",
             "type": "node",
             "request": "launch",
