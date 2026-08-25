@@ -1,5 +1,4 @@
-require('dotenv').config()
-
+const config = require('./utils/config')
 const express = require('express')
 const mongoose = require('mongoose')
 
@@ -14,7 +13,7 @@ const blogSchema = mongoose.Schema({
 
 const Blog = mongoose.model('Blog', blogSchema)
 
-const mongoUrl = `${process.env.DB_PROTOCOL}${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}/${process.env.DB_NAME}?retryWrites=true&w=majority&appName=${process.env.DB_APP_NAME}`
+const mongoUrl = `${config.DB_PROTOCOL}${config.DB_USER}:${config.DB_PASSWORD}@${config.DB_HOST}/${config.DB_NAME}?retryWrites=true&w=majority&appName=${config.DB_APP_NAME}`
 mongoose.connect(mongoUrl, { family: 4 })
 
 app.use(express.json())
@@ -33,7 +32,7 @@ app.post('/api/blogs', (request, response) => {
   })
 })
 
-const PORT = process.env.PORT
+const PORT = config.PORT
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
