@@ -6,8 +6,11 @@ POST http://localhost:3003/api/blogs
 Content-Type: application/json
 
 {
-  "title": "Test Entry 3",
-  "author": "Jason VanDame",
-  "url": "http://www.subway.com",
+  "title": "Test Entry 6",
+  "author": "Al VanDame",
+  "url": "http://www.ford.com",
   "likes": 1
 }
+
+### GET Unknown Endpoint
+GET http://localhost:3003/api/blogs/unknown

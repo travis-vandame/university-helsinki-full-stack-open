@@ -1,6 +1,6 @@
 require('dotenv').config()
 
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 3003
 const DB_USER = process.env.DB_USER
 const DB_PASSWORD = process.env.DB_PASSWORD
 const DB_PROTOCOL = process.env.DB_PROTOCOL
