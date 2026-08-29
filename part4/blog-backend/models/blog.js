@@ -1,9 +1,24 @@
 const mongoose = require('mongoose')
 
 const blogSchema = mongoose.Schema({
-  title: String,
-  author: String,
-  url: String,
+  title: {
+    type: String,
+    required: true
+  },
+  author: {
+    type: String,
+    required: true
+  },
+  url: {
+    type: String,
+    validate: {
+      validator: function(v) {
+        return /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\\/\w .-]*)*\/?$/.test(v)
+      },
+      message: props => `${props.value} is not a valid URL`
+    },
+    required: true
+  },
   likes: Number,
 })
 
