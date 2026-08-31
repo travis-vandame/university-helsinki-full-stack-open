@@ -66,3 +66,31 @@ test('blog added with likes missing should default to zero', async () => {
 
   assert.strictEqual(response.body.likes, 0)
 })
+
+test('blog with missing title returns 400', async () => {
+  const newBlog = {
+    author: 'Travis VanDame',
+    url: 'http://www.google.com'
+  }
+
+  const response = await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(400)
+
+  assert.ok(response.body.error)
+})
+
+test('blog with missing url returns 400', async () => {
+  const newBlog = {
+    title: 'Blog With Missing URL',
+    author: 'Travis VanDame'
+  }
+
+  const response = await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(400)
+
+  assert.ok(response.body.error)
+})
