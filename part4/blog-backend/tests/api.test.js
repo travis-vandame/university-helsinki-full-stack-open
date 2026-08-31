@@ -70,6 +70,23 @@ describe('API Tests', async () => {
     })
   })
 
+  describe('deleting new blogs', () => {
+    test('a blog can be deleted', async () => {
+      const blogsAtStart = await testHelper.blogsInDb()
+      const blogToDelete = blogsAtStart[0]
+
+      await api
+        .delete(`/api/blogs/${blogToDelete.id}`)
+        .expect(204)
+
+      const blogsAtEnd = await testHelper.blogsInDb()
+      const ids = blogsAtEnd.map(b => b.id)
+
+      assert(!ids.includes(blogToDelete.id))
+      assert.strictEqual(blogsAtEnd.length, testHelper.listWithManyBlogs.length - 1)
+    })
+  })
+
   describe('validation of new blogs', () => {
     test('blog with missing title returns 400', async () => {
       const newBlog = {
