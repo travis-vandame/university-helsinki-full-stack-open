@@ -70,6 +70,34 @@ describe('API Tests', async () => {
     })
   })
 
+  describe('updating a blog', () => {
+    test('a blog can be updated', async () => {
+      const blogsAtStart = await testHelper.blogsInDb()
+      const blogToUpdate = blogsAtStart[0]
+
+      const updatedBlog = {
+        title: blogToUpdate.title + ' updated',
+        author: blogToUpdate.author,
+        url: blogToUpdate.url
+      }
+
+      await api
+        .patch(`/api/blogs/${blogToUpdate.id}`)
+        .send(updatedBlog)
+        .expect(200)
+        .expect('Content-Type', /application\/json/)
+
+      const updatedBlogResponse = await api
+        .get(`/api/blogs/${blogToUpdate.id}`)
+        .expect(200)
+        .expect('Content-Type', /application\/json/)
+
+      assert.strictEqual(updatedBlogResponse.body.title, updatedBlog.title)
+      assert.strictEqual(updatedBlogResponse.body.author, updatedBlog.author)
+      assert.strictEqual(updatedBlogResponse.body.url, updatedBlog.url)
+    })
+  })
+
   describe('deleting new blogs', () => {
     test('a blog can be deleted', async () => {
       const blogsAtStart = await testHelper.blogsInDb()
