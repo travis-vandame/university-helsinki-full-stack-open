@@ -1,70 +1,7 @@
 const { test, describe } = require('node:test')
 const assert = require('assert')
 const listHelper = require('../utils/list-helper')
-
-const listEmpty = []
-
-const listWithOneBlog = [
-  {
-    _id: '5a422a851b54a676234d17f7',
-    title: 'React patterns',
-    author: 'Michael Chan',
-    url: 'https://reactpatterns.com/',
-    likes: 7,
-    __v: 0
-  }
-]
-
-const listWithManyBlogs = [
-  {
-    _id: '5a422a851b54a676234d17f7',
-    title: 'React patterns',
-    author: 'Michael Chan',
-    url: 'https://reactpatterns.com/',
-    likes: 7,
-    __v: 0
-  },
-  {
-    _id: '5a422aa71b54a676234d17f8',
-    title: 'Go To Statement Considered Harmful',
-    author: 'Edsger W. Dijkstra',
-    url: 'http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html',
-    likes: 5,
-    __v: 0
-  },
-  {
-    _id: '5a422b3a1b54a676234d17f9',
-    title: 'Canonical string reduction',
-    author: 'Edsger W. Dijkstra',
-    url: 'http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html',
-    likes: 12,
-    __v: 0
-  },
-  {
-    _id: '5a422b891b54a676234d17fa',
-    title: 'First class tests',
-    author: 'Robert C. Martin',
-    url: 'http://blog.cleancoder.com/uncle-bob/2017/05/05/TestDefinitions.htmll',
-    likes: 10,
-    __v: 0
-  },
-  {
-    _id: '5a422ba71b54a676234d17fb',
-    title: 'TDD harms architecture',
-    author: 'Robert C. Martin',
-    url: 'http://blog.cleancoder.com/uncle-bob/2017/03/03/TDD-Harms-Architecture.html',
-    likes: 0,
-    __v: 0
-  },
-  {
-    _id: '5a422bc61b54a676234d17fc',
-    title: 'Type wars',
-    author: 'Robert C. Martin',
-    url: 'http://blog.cleancoder.com/uncle-bob/2016/05/01/TypeWars.html',
-    likes: 2,
-    __v: 0
-  }
-]
+const testHelper = require('./tests-helper')
 
 test('dummy list returns one', () => {
   const result = listHelper.dummy()
@@ -73,12 +10,12 @@ test('dummy list returns one', () => {
 
 describe('totalLikes', () => {
   test('when list has one blog equals its likes', () => {
-    const result = listHelper.totalLikes(listWithOneBlog)
+    const result = listHelper.totalLikes(testHelper.listWithOneBlog)
     assert.strictEqual(result, 7)
   })
 
   test('when list has many blogs calculates total correctly', () => {
-    const result = listHelper.totalLikes(listWithManyBlogs)
+    const result = listHelper.totalLikes(testHelper.listWithManyBlogs)
     assert.strictEqual(result, 36)
   })
 
@@ -90,7 +27,7 @@ describe('totalLikes', () => {
 
 describe('mostLikes', () => {
   test('returns the author with the most total likes', () => {
-    const result = listHelper.mostLikes(listWithManyBlogs)
+    const result = listHelper.mostLikes(testHelper.listWithManyBlogs)
     assert.deepStrictEqual(result, {
       author: 'Edsger W. Dijkstra',
       likes: 17
@@ -100,12 +37,12 @@ describe('mostLikes', () => {
 
 describe('sortByLikes', () => {
   test('returns blogs sorted by likes descending', () => {
-    const result = listHelper.sortByLikes(listWithOneBlog)
+    const result = listHelper.sortByLikes(testHelper.listWithOneBlog)
     assert.strictEqual(result[0].likes, 7)
   })
 
   test('of many blogs returns correct order', () => {
-    const result = listHelper.sortByLikes(listWithManyBlogs)
+    const result = listHelper.sortByLikes(testHelper.listWithManyBlogs)
     assert.strictEqual(result[0].likes, 12)
     assert.strictEqual(result[result.length - 1].likes, 0)
   })
@@ -113,12 +50,12 @@ describe('sortByLikes', () => {
 
 describe('averageLikes', () => {
   test('of single blog returns its likes', () => {
-    const result = listHelper.averageLikes(listWithOneBlog)
+    const result = listHelper.averageLikes(testHelper.listWithOneBlog)
     assert.strictEqual(result, 7)
   })
 
   test('of many blogs calculates mean correctly', () => {
-    const result = listHelper.averageLikes(listWithManyBlogs)
+    const result = listHelper.averageLikes(testHelper.listWithManyBlogs)
     assert.strictEqual(result, 36 / 6)
   })
 
@@ -130,7 +67,7 @@ describe('averageLikes', () => {
 
 describe('mostBlogs', () => {
   test('returns the author with the most blogs', () => {
-    const result = listHelper.mostBlogs(listWithManyBlogs)
+    const result = listHelper.mostBlogs(testHelper.listWithManyBlogs)
     assert.deepStrictEqual(result, {
       author: 'Robert C. Martin',
       blogs: 3
@@ -140,7 +77,7 @@ describe('mostBlogs', () => {
 
 describe('favoriteBlog', () => {
   test('returns the blog with the most likes', () => {
-    const result = listHelper.favoriteBlog(listWithManyBlogs)
+    const result = listHelper.favoriteBlog(testHelper.listWithManyBlogs)
     assert.deepStrictEqual(result, {
       _id: '5a422b3a1b54a676234d17f9',
       title: 'Canonical string reduction',
@@ -154,19 +91,19 @@ describe('favoriteBlog', () => {
 
 describe('uniqueAuthors', () => {
   test('returns array of unique author names', () => {
-    const result = listHelper.uniqueAuthors(listWithManyBlogs)
+    const result = listHelper.uniqueAuthors(testHelper.listWithManyBlogs)
     assert.deepStrictEqual(result, ['Michael Chan', 'Edsger W. Dijkstra', 'Robert C. Martin'])
   })
 
   test('of empty list returns empty array', () => {
-    const result = listHelper.uniqueAuthors(listEmpty)
+    const result = listHelper.uniqueAuthors(testHelper.listEmpty)
     assert.deepStrictEqual(result, [])
   })
 })
 
 describe('blogByAuthor', () => {
   test('returns blogs by a specific author', () => {
-    const result = listHelper.blogByAuthor(listWithManyBlogs, 'Edsger W. Dijkstra')
+    const result = listHelper.blogByAuthor(testHelper.listWithManyBlogs, 'Edsger W. Dijkstra')
     assert.strictEqual(result.length, 2)
     assert.deepStrictEqual(result[0], {
       _id: '5a422aa71b54a676234d17f8',
@@ -179,19 +116,19 @@ describe('blogByAuthor', () => {
   })
 
   test('returns empty array when author not found', () => {
-    const result = listHelper.blogByAuthor(listWithManyBlogs, 'Nobody')
+    const result = listHelper.blogByAuthor(testHelper.listWithManyBlogs, 'Nobody')
     assert.deepStrictEqual(result, [])
   })
 
   test('of empty list returns empty array', () => {
-    const result = listHelper.blogByAuthor(listEmpty, 'Nobody')
+    const result = listHelper.blogByAuthor(testHelper.listEmpty, 'Nobody')
     assert.deepStrictEqual(result, [])
   })
 })
 
 describe('blogSummaries', () => {
   test('returns array of title-author objects', () => {
-    const result = listHelper.blogSummaries(listWithOneBlog)
+    const result = listHelper.blogSummaries(testHelper.listWithOneBlog)
     assert.deepStrictEqual(result, [{
       title: 'React patterns',
       author: 'Michael Chan'

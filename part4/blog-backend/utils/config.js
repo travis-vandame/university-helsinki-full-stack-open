@@ -6,8 +6,12 @@ const DB_PASSWORD = process.env.DB_PASSWORD
 const DB_PROTOCOL = process.env.DB_PROTOCOL
 const DB_HOST = process.env.DB_HOST
 const DB_NAME = process.env.DB_NAME
+const DB_NAME_TEST = process.env.DB_NAME_TEST
 const DB_APP_NAME = process.env.DB_APP_NAME
-const MONGO_DB_URI = `${DB_PROTOCOL}${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}?retryWrites=true&w=majority&appName=${DB_APP_NAME}`
+
+const MONGO_DB_URI = process.env.NODE_ENV === 'test'
+  ? `${DB_PROTOCOL}${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME_TEST}?retryWrites=true&w=majority&appName=${DB_APP_NAME}`
+  : `${DB_PROTOCOL}${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}?retryWrites=true&w=majority&appName=${DB_APP_NAME}`
 
 module.exports = {
   PORT,
@@ -16,6 +20,7 @@ module.exports = {
   DB_PROTOCOL,
   DB_HOST,
   DB_NAME,
+  DB_NAME_TEST,
   DB_APP_NAME,
   MONGO_DB_URI
 }

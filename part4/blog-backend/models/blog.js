@@ -13,7 +13,13 @@ const blogSchema = mongoose.Schema({
     type: String,
     validate: {
       validator: function(v) {
-        return /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\\/\w .-]*)*\/?$/.test(v)
+        try {
+          new URL(v)
+          return true
+        // eslint-disable-next-line no-unused-vars
+        } catch (error) {
+          return false
+        }
       },
       message: props => `${props.value} is not a valid URL`
     },
