@@ -50,3 +50,19 @@ test('a valid blog can be added', async () => {
   const titles = blogsAtEnd.map(b => b.title)
   assert(titles.includes('Test New Blog Entry'))
 })
+
+test('blog added with likes missing should default to zero', async () => {
+  const newBlog = {
+    title: 'Test New Blog Entry Missing Likes',
+    author: 'Travis VanDame',
+    url: 'http://www.github.com/travis-vandame'
+  }
+
+  const response = await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
+
+  assert.strictEqual(response.body.likes, 0)
+})
