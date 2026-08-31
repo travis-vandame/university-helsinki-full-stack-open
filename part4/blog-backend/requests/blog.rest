@@ -1,0 +1,27 @@
+### Get Blog List
+GET http://localhost:3003/api/blogs
+
+### Post New Entry (valid)
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+  "title": "Test Entry 7",
+  "author": "Jon VanDame",
+  "url": "http://www.google.com",
+  "likes": 1
+}
+
+### Post New Entry (Not Valid)
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+  "title": "",
+  "author": "Not Valid",
+  "url": "",
+  "likes": 1
+}
+
+### GET Unknown Endpoint
+GET http://localhost:3003/api/blogs/unknown
