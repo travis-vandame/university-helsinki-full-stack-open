@@ -21,3 +21,12 @@ test('all blogs are returned', async () => {
   const response = await api.get('/api/blogs')
   assert.strictEqual(response.body.length, testHelper.listWithManyBlogs.length)
 })
+
+test('blog object has id field instead of _id', async () => {
+  const blogsAtStart = await testHelper.blogsInDb()
+  const blog = blogsAtStart[0]
+
+  assert.ok(blog.id)
+  assert.ok(!blog._id)
+  assert.ok(!blog.__v)
+})
