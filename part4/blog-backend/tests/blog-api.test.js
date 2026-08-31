@@ -30,3 +30,23 @@ test('blog object has id field instead of _id', async () => {
   assert.ok(!blog._id)
   assert.ok(!blog.__v)
 })
+
+test('a valid blog can be added', async () => {
+  const newBlog = {
+    title: 'Test New Blog Entry',
+    author: 'Travis VanDame',
+    url: 'http://www.github.com/travis-vandame'
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
+
+  const blogsAtEnd = await testHelper.blogsInDb()
+  assert.strictEqual(blogsAtEnd.length, testHelper.listWithManyBlogs.length + 1)
+
+  const titles = blogsAtEnd.map(b => b.title)
+  assert(titles.includes('Test New Blog Entry'))
+})
